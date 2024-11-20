@@ -11,16 +11,19 @@ class MahasiswaViewModel : ViewModel() {
     //only access internal class
     private val _dataModel = MutableStateFlow(Mahasiswa())
     //access for public
-    val dataModel: StateFlow<Mahasiswa> = _dataModel.asStateFlow()
+    val uiState: StateFlow<Mahasiswa> = _dataModel.asStateFlow()
 
     fun saveDataMhs(
         listData : MutableList<String>
     ){
-        _dataModel.update { mhs ->
-            mhs.copy(
+        _dataModel.update { data ->
+            data.copy(
                 nama = listData[0],
-                gender = listData[1],
-                alamat = listData[2]
+                nim = listData[1],
+                email = listData[2],
+                noHp = listData[3],
+                gender = listData[4],
+                alamat = listData[5]
             )
         }
     }
