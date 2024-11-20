@@ -22,8 +22,8 @@ class MahasiswaViewModel : ViewModel() {
                 nim = listData[1],
                 email = listData[2],
                 noHp = listData[3],
-                gender = listData[4],
-                alamat = listData[5]
+                alamat = listData[4],
+                gender = listData[5]
             )
         }
     }
