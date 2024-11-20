@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,26 +17,48 @@ import androidx.compose.ui.unit.sp
 import com.example.pertemuan7.model.Mahasiswa
 
 @Composable
-fun DetailMahasiswaView(
-    dataMhs: Mahasiswa
+fun TampilMahasiswaView(
+    dataMhs: Mahasiswa,
+    onBackClick: () -> Unit
 ){
-    val listDataMhs = listOf(
-        Pair("Nama", dataMhs.nama),
-        Pair("Gender", dataMhs.gender),
-        Pair("Alamat", dataMhs.alamat)
-    )
     Column(modifier = Modifier.fillMaxSize().
-        padding(16.dp)
+        padding(8.dp)
     ) {
-        listDataMhs.forEach { data ->
-            DetailMessage(judul = data.first,
-                isi = data.second)
+        TampilData(
+            judul = "Nama",
+            isi = dataMhs.nama
+        )
+        TampilData(
+            judul = "NIM",
+            isi = dataMhs.nim
+        )
+        TampilData(
+            judul = "E-mail",
+            isi = dataMhs.email
+        )
+        TampilData(
+            judul = "Nomor HP",
+            isi = dataMhs.noHp
+        )
+        TampilData(
+            judul = "Jenis Kelamin",
+            isi = dataMhs.gender
+        )
+        TampilData(
+            judul = "ALamat",
+            isi = dataMhs.alamat
+        )
+        Button(
+            onClick = onBackClick,
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+        ) {
+            Text(text = "Kembali")
         }
     }
 }
 
 @Composable
-fun DetailMessage(
+fun TampilData(
     judul: String, isi: String
 ) {
     Column(modifier = Modifier.padding(16.dp))
@@ -46,7 +69,7 @@ fun DetailMessage(
         ) {
             Text(
                 text = judul,
-                modifier = Modifier.weight(0.3f),
+                modifier = Modifier.weight(0.8f),
                 fontSize = 14.sp
             )
             Text(
@@ -56,7 +79,7 @@ fun DetailMessage(
             )
             Text(
                 text = isi,
-                modifier = Modifier.weight(0.9f),
+                modifier = Modifier.weight(2f),
                 fontWeight = FontWeight.Bold,
                 fontFamily = Cursive
             )

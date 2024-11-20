@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,12 +32,12 @@ fun FormulirView(
 ){
     var nama by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-    var noTelpon by remember { mutableStateOf("") }
+    var noHp by remember { mutableStateOf("") }
+    var nim by remember { mutableStateOf("") }
     var alamat by remember { mutableStateOf("") }
-    var memilihjk by remember { mutableStateOf("") }
-
+    var jenisK by remember { mutableStateOf("") }
     val listData: MutableList<String> = mutableListOf(
-        nama, memilihjk, alamat
+        nama, nim, email, noHp, alamat, jenisK
     )
 
 
@@ -46,7 +47,7 @@ fun FormulirView(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Biodata",
-            fontSize = 16.sp
+            fontSize = 28.sp
             , fontWeight = FontWeight.Bold)
         Spacer(Modifier.padding(16.dp))
         TextField(
@@ -56,15 +57,26 @@ fun FormulirView(
             placeholder = {Text("Masukkan Nama Anda")},
             modifier = Modifier.fillMaxWidth().padding(5.dp)
         )
+        TextField(
+            value = nim,
+            onValueChange = {nim = it},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(5.dp),
+            label = { Text(text = "nim") },
+            placeholder = { Text("Masukkan NIM Anda", color = Color.Gray)
+            }
+        )
+
         Row {
-            pilihanJK.forEach{Unit ->
+            pilihanJK.forEach{selectedJK ->
                 Row(verticalAlignment = Alignment.CenterVertically) { RadioButton(
-                    selected = memilihjk == Unit,
+                    selected = jenisK == selectedJK,
                     onClick = {
-                        memilihjk = Unit
+                        jenisK = selectedJK
                     }
                 )
-                    Text(Unit)
+                    Text(selectedJK)
                 }
             }
         }
@@ -78,8 +90,8 @@ fun FormulirView(
         )
         TextField(
             modifier = Modifier.fillMaxWidth().padding(5.dp),
-            value = noTelpon,
-            onValueChange = {noTelpon = it},
+            value = noHp,
+            onValueChange = {noHp = it},
             label = { Text("No Telepon")},
             placeholder = {Text("Masukkan Nomor Telepon Anda")}
         )
@@ -92,7 +104,8 @@ fun FormulirView(
         )
 
         Button(onClick = {
-        }) {
+            onClickButton(listData)}, Modifier.padding(vertical = 10.dp))
+        {
             Text("Submit")
         }
     }
