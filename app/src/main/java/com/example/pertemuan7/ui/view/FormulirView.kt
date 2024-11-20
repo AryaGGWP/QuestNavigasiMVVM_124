@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun FormatMahasiswaView(
+fun FormulirView(
     modifier: Modifier = Modifier,
-    ListGender: List<String>,
-    onSubmitClick: (MutableList<String>) -> Unit
+    pilihanJK: List<String>,
+    onClickButton: (MutableList<String>) -> Unit
 
 
 ){
@@ -57,7 +57,7 @@ fun FormatMahasiswaView(
             modifier = Modifier.fillMaxWidth().padding(5.dp)
         )
         Row {
-            ListGender.forEach{Unit ->
+            pilihanJK.forEach{Unit ->
                 Row(verticalAlignment = Alignment.CenterVertically) { RadioButton(
                     selected = memilihjk == Unit,
                     onClick = {
